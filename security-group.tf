@@ -13,7 +13,7 @@ variable "secretKey" {
 provider "aws" {
   access_key = "{var.accessKey}"
   secret_key = "{var.secretKey}"
-  region     = "{us-east-2}"
+  region     = "us-east-2"
 }
 
 # Create EC2 instance
