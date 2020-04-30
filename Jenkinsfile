@@ -18,9 +18,8 @@ pipeline {
       steps {
         sh 'docker run -w /app -v /awsCredentials:/awsCredentials -v `pwd`:/app hashicorp/terraform:light init'
       }
-    }
-    stages {
-    stage('plan') {
+    } 
+   stage('plan') {
 	   steps {
 			withCredentials([[
 				$class: 'AmazonWebServicesCredentialsBinding',
@@ -55,5 +54,4 @@ pipeline {
       }
     }*/
   }
-}
 }
