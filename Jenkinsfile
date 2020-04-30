@@ -19,11 +19,27 @@ pipeline {
         sh 'docker run -w /app -v /awsCredentials:/awsCredentials -v `pwd`:/app hashicorp/terraform:light init'
       }
     }
+    stages {
     stage('plan') {
+	   steps {
+			withCredentials([[
+				$class: 'AmazonWebServicesCredentialsBinding',
+				credentialsId: 'awsCredentials',
+				accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+				secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+			]]) {
+					sh 'echo `date`'
+					sh 'terraform init -var accessKey=${AWS_ACCESS_KEY_ID} -var secretKey=${AWS_SECRET_ACCESS_KEY}'	
+					sh 'terraform plan -var accessKey=${AWS_ACCESS_KEY_ID} -var secretKey=${AWS_SECRET_ACCESS_KEY}'
+				}
+			
+		}
+	}
+    /*stage('plan') {
       steps {
         sh 'docker run -w /app -v /awsCredentials:/awsCredentials -v `pwd`:/app hashicorp/terraform:light plan'
       }
-    }
+    }*/
     stage('approval') {
       options {
         timeout(time: 1, unit: 'HOURS') 
@@ -32,11 +48,11 @@ pipeline {
         input 'approve the plan to proceed and apply'
       }
     }
-    stage('apply') {
+    /*stage('apply') {
       steps {
         sh 'docker run -w /app -v /awsCredentials:/awsCredentials -v `pwd`:/app hashicorp/terraform:light apply -auto-approve'
         cleanWs()
       }
-    }
+    }*/
   }
 }
