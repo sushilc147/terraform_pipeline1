@@ -1,7 +1,7 @@
 variable "accessKey" {
-  type        = "string"
-  description = "AWS access key id"
-  default = "missing"
+  type        = string
+  description = 'AWS access key id'
+  default = 'missing'
 }
 
 variable "secretKey" {
