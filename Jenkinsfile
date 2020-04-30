@@ -14,11 +14,11 @@ pipeline {
         sh 'docker pull hashicorp/terraform:light'
       }
     }
-    stage('init') {
+    /*stage('init') {
       steps {
         sh 'docker run -w /app -v /awsCredentials:/awsCredentials -v `pwd`:/app hashicorp/terraform:light init'
       }
-    } 
+    } */
    stage('plan') {
 	   steps {
 			withCredentials([[
