@@ -1,6 +1,19 @@
+variable "accessKey" {
+  type        = "string"
+  description = "AWS access key id"
+  default = "missing"
+}
+
+variable "secretKey" {
+  type        = "string"
+  description = "AWS access secret key"
+  default = "missing"
+}
 # Use AWS Terraform provider
 provider "aws" {
-  region = "us-east-2"
+  access_key = "${var.accessKey}"
+  secret_key = "${var.secretKey}"
+  region     = "us-east-2"
 }
 
 # Create EC2 instance
