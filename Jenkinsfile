@@ -30,8 +30,11 @@ pipeline {
 					sh 'echo `date`'
 					sh 'docker run -w /app -v /awsCredentials:/awsCredentials -v `pwd`:/app hashicorp/terraform:light init'
 					sh 'echo `hello`'
+					
 					sh 'docker run -w /app -v /awsCredentials:/awsCredentials -v `pwd`:/app hashicorp/terraform:light plan'
-				}
+					sh 'terraform init -var accessKey=${AWS_ACCESS_KEY_ID} -var secretKey=${AWS_SECRET_ACCESS_KEY}'	
+
+			}
 			
 		}
 	}
