@@ -1,5 +1,5 @@
 // Jenkinsfile
-String credentialsId = 'awsCredentials'
+String credentialsId = 'workingaws'
 
 pipeline {   
   agent {
@@ -23,14 +23,14 @@ pipeline {
 	   steps {
 			withCredentials([[
 				$class: 'AmazonWebServicesCredentialsBinding',
-				credentialsId: 'awsCredentials',
+				credentialsId: 'workingaws',
 				accessKeyVariable: 'AWS_ACCESS_KEY_ID',
 				secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
 			]]) {
 					sh 'echo `date`'
-					sh 'docker run -w /app -v /awsCredentials:/awsCredentials -v `pwd`:/app hashicorp/terraform:light init'
+					sh 'docker run -w /app -v /workingaws:/workingaws -v `pwd`:/app hashicorp/terraform:light init'
 					sh 'echo hello'
-					sh 'docker run -w /app -v /awsCredentials:/awsCredentials -v `pwd`:/app hashicorp/terraform:light plan'
+					sh 'docker run -w /app -v /workingaws:/workingaws -v `pwd`:/app hashicorp/terraform:light plan'
 					sh 'terraform init -var accessKey=${AWS_ACCESS_KEY_ID} -var secretKey=${AWS_SECRET_ACCESS_KEY}'	
 
 			}
