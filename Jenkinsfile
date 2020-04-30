@@ -45,7 +45,7 @@ pipeline {
     }*/
     stage('approval') {
       options {
-        timeout(time: 1, unit: 'HOURS') 
+        timeout(time: 5, unit: 'SECOND') 
       }
       steps {
         input 'approve the plan to proceed and apply'
