@@ -31,7 +31,7 @@ pipeline {
 					sh 'docker run -w /app -v /workingaws:/workingaws -v `pwd`:/app hashicorp/terraform:light version'
 					//sh 'terraform --version'
 					//sh 'echo hello'
-					sh 'docker run -w /app -v /workingaws:/workingaws -v `pwd`:/app hashicorp/terraform:light 0.12upgrade'
+					sh 'docker run -w /app -v /workingaws:/workingaws -v `pwd`:/app hashicorp/terraform:light 0.12upgrade -yes'
 					//sh 'terraform init -var accessKey=${AWS_ACCESS_KEY_ID} -var secretKey=${AWS_SECRET_ACCESS_KEY}'	
 
 			}
@@ -43,14 +43,14 @@ pipeline {
         sh 'docker run -w /app -v /awsCredentials:/awsCredentials -v `pwd`:/app hashicorp/terraform:light plan'
       }
     }*/
-    stage('approval') {
+    /*stage('approval') {
       options {
-        timeout(time: 5, unit: 'SECOND') 
+        timeout(time: 1, unit: 'HOUR') 
       }
       steps {
         input 'approve the plan to proceed and apply'
       }
-    }
+    }*/
     /*stage('apply') {
       steps {
         sh 'docker run -w /app -v /awsCredentials:/awsCredentials -v `pwd`:/app hashicorp/terraform:light apply -auto-approve'
