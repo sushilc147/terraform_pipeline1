@@ -27,11 +27,11 @@ pipeline {
 				accessKeyVariable: 'AWS_ACCESS_KEY_ID',
 				secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
 			]]) {
-					//sh 'echo `date`'
-					//sh 'docker run -w /app -v /workingaws:/workingaws -v `pwd`:/app hashicorp/terraform:light version'
-					//sh 'terraform --version'
-					//sh 'echo hello'
-					//sh 'docker run -w /app -v /workingaws:/workingaws -v `pwd`:/app hashicorp/terraform:light 0.12upgrade -yes'
+					sh 'echo `date`'
+					sh 'docker run -w /app -v /workingaws:/workingaws -v `pwd`:/app hashicorp/terraform:light version'
+					sh 'terraform --version'
+					sh 'echo hello'
+					sh 'docker run -w /app -v /workingaws:/workingaws -v `pwd`:/app hashicorp/terraform:light 0.12upgrade -yes'
 					sh 'terraform init -var accessKey=${AWS_ACCESS_KEY_ID} -var secretKey=${AWS_SECRET_ACCESS_KEY}'	
 
 			}
