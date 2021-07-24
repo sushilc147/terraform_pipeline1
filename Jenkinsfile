@@ -34,7 +34,7 @@ pipeline {
 					//sh 'docker run -w /app -v /workingaws:/workingaws -v `pwd`:/app hashicorp/terraform:light 0.12upgrade -yes'
 					sh 'terraform init -var accessKey=${AWS_ACCESS_KEY_ID} -var secretKey=${AWS_SECRET_ACCESS_KEY}'	
 					sh 'terraform plan -var accessKey=${AWS_ACCESS_KEY_ID} -var secretKey=${AWS_SECRET_ACCESS_KEY}'	
-					sh 'terraform apply -var accessKey=${AWS_ACCESS_KEY_ID} -var secretKey=${AWS_SECRET_ACCESS_KEY} -auto-approve'	
+					sh 'terraform destroy -var accessKey=${AWS_ACCESS_KEY_ID} -var secretKey=${AWS_SECRET_ACCESS_KEY} -auto-approve'	
 
 			}
 			
